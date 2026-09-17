@@ -73,12 +73,18 @@ sync_tree() {
 }
 sync_tree "$SRC" "$TARGET"
 
-# Entitlements next to common Resources locations
+# Entitlements & Resources next to common locations
+cp -Rf "$ROOT/MacURDFApp/Resources/Assets.xcassets" "$TARGET/" 2>/dev/null || true
+cp -f "$ROOT/MacURDFApp/Resources/Info.plist" "$TARGET/" 2>/dev/null || true
+cp -f "$ROOT/MacURDFApp/Resources/AppIcon.icns" "$TARGET/" 2>/dev/null || true
+cp -f "$ROOT/MacURDFApp/Resources/MacURDFApp.entitlements" "$TARGET/../MacURDFApp.entitlements" 2>/dev/null || true
+
 for RES in "$TARGET/../Resources" "$DEST/Resources" "$DEST/../Resources"; do
   if [[ -d "$RES" ]]; then
     cp -f "$ROOT/MacURDFApp/Resources/MacURDFApp.entitlements" "$RES/" 2>/dev/null || true
+    cp -f "$ROOT/MacURDFApp/Resources/Info.plist" "$RES/" 2>/dev/null || true
   fi
 done
 
-echo "Synced $SRC -> $TARGET"
+echo "Synced $SRC -> $TARGET (including assets & plists)"
 echo "Prefer pointing the Xcode target at repo MacURDFApp/Sources/MacURDFApp instead of copying."
