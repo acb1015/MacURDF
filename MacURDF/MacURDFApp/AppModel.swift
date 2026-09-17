@@ -36,7 +36,7 @@ final class AppModel: ObservableObject {
     }
     @Published var viewportTheme: ViewportTheme = .darkSlate
     @Published var useZUpToYUp: Bool = true
-    @Published var tealMeshTint: Bool = true
+    @Published var tealMeshTint: Bool = false
     @Published var showIssuesPanel: Bool = true
     @Published var invertOrbit: Bool = false
 
